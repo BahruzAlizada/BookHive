@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{BB54E3FC-82B8-4C42-A683-C2D1B6920C64}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{015F65B5-F0C1-44F3-AB77-537A9C245198}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{D93CA433-0A1B-4323-882A-02E7E75711FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookHive.Domain", "Core\BookHive.Domain\BookHive.Domain.csproj", "{8C7240A7-39CE-4449-979D-BCE31918913E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookHive.Application", "Core\BookHive.Application\BookHive.Application.csproj", "{0F8C9643-54CD-4CED-A4FF-3813D9834D24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookHive.Infrastructure", "Infrastructure\BookHive.Infrastructure\BookHive.Infrastructure.csproj", "{7CA2308D-2E8D-42FD-96DB-947027108DE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookHive.Persistence", "Infrastructure\BookHive.Persistence\BookHive.Persistence.csproj", "{75D7CD3B-7A2E-4E3E-87A9-E1128E717466}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookHive.API", "Presentation\BookHive.API\BookHive.API.csproj", "{B8D4577E-8A8B-4EE7-9BA6-08B47C1437DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C7240A7-39CE-4449-979D-BCE31918913E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C7240A7-39CE-4449-979D-BCE31918913E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C7240A7-39CE-4449-979D-BCE31918913E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C7240A7-39CE-4449-979D-BCE31918913E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F8C9643-54CD-4CED-A4FF-3813D9834D24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F8C9643-54CD-4CED-A4FF-3813D9834D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F8C9643-54CD-4CED-A4FF-3813D9834D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F8C9643-54CD-4CED-A4FF-3813D9834D24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CA2308D-2E8D-42FD-96DB-947027108DE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CA2308D-2E8D-42FD-96DB-947027108DE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CA2308D-2E8D-42FD-96DB-947027108DE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CA2308D-2E8D-42FD-96DB-947027108DE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75D7CD3B-7A2E-4E3E-87A9-E1128E717466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75D7CD3B-7A2E-4E3E-87A9-E1128E717466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75D7CD3B-7A2E-4E3E-87A9-E1128E717466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75D7CD3B-7A2E-4E3E-87A9-E1128E717466}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8D4577E-8A8B-4EE7-9BA6-08B47C1437DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8D4577E-8A8B-4EE7-9BA6-08B47C1437DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8D4577E-8A8B-4EE7-9BA6-08B47C1437DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8D4577E-8A8B-4EE7-9BA6-08B47C1437DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8C7240A7-39CE-4449-979D-BCE31918913E} = {BB54E3FC-82B8-4C42-A683-C2D1B6920C64}
+		{0F8C9643-54CD-4CED-A4FF-3813D9834D24} = {BB54E3FC-82B8-4C42-A683-C2D1B6920C64}
+		{7CA2308D-2E8D-42FD-96DB-947027108DE4} = {015F65B5-F0C1-44F3-AB77-537A9C245198}
+		{75D7CD3B-7A2E-4E3E-87A9-E1128E717466} = {015F65B5-F0C1-44F3-AB77-537A9C245198}
+		{B8D4577E-8A8B-4EE7-9BA6-08B47C1437DF} = {D93CA433-0A1B-4323-882A-02E7E75711FA}
+	EndGlobalSection
+EndGlobal

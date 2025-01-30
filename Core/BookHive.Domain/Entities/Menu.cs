@@ -8,3 +8,4 @@ namespace BookHive.Domain.Entities
         public ICollection<Endpoint> Endpoints { get; set; }
     }
 }
+    

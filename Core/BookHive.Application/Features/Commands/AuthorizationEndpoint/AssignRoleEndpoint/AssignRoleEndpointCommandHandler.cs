@@ -1,6 +1,6 @@
 ﻿
 using BookHive.Application.Abstracts.Services;
-using BookHive.Application.ConstMessages;
+using BookHive.Application.Constants;
 using MediatR;
 
 namespace BookHive.Application.Features.Commands.AuthorizationEndpoint.AssignRoleEndpoint

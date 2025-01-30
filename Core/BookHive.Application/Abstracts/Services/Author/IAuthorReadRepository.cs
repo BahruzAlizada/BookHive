@@ -6,7 +6,5 @@ namespace BookHive.Application.Abstracts.Services
 {
     public interface IAuthorReadRepository : IReadRepository<Author>
     {
-        Task<List<AuthorDto>> GetAuthorDtosAsync();
-        Task<AuthorDto> GetAuthorDtoAsync(Guid id);
     }
 }

@@ -1,7 +1,11 @@
 ﻿using BookHive.Application.Abstracts.Services;
-using BookHive.Application.ConstMessages;
+using BookHive.Application.Constants;
 using BookHive.Application.DTOs;
+using BookHive.Application.Parametres.ResponseParametres;
+using BookHive.Domain.Entities;
+using Mapster;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookHive.Application.Features.Queries.Author.GetAllAuthor
 {
@@ -16,16 +20,10 @@ namespace BookHive.Application.Features.Queries.Author.GetAllAuthor
 
         public async Task<GetAllAuthorQueryResponse> Handle(GetAllAuthorQueryRequest request, CancellationToken cancellationToken)
         {
-            List<AuthorDto> authorDtos = await authorReadRepository.GetAuthorDtosAsync();
-            return new GetAllAuthorQueryResponse
-            {
-                AuthorDtos = authorDtos,
-                Result = new Parametres.ResponseParametres.Result
-                {
-                    Success = true,
-                    Message = Messages.SuccessListed
-                }
-            };
+            List<BookHive.Domain.Entities.Author> authors = await authorReadRepository.GetAll().ToListAsync();
+            List<AuthorDto> authorDtos = authors.Adapt<List<AuthorDto>>();
+
+            return new GetAllAuthorQueryResponse { AuthorDtos = authorDtos, Result = new SuccessResult(Messages.SuccessListed) };
         }
     }
 }

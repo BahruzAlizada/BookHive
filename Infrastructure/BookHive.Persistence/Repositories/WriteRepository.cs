@@ -1,20 +1,16 @@
-﻿
-
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using BookHive.Application.Repositories;
 using BookHive.Domain.Common;
-using BookHive.Persistence.Context;
+using BookHive.Persistence.Concrete;
 
 
 namespace BookHive.Persistence.Repositories
 {
     public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
     {
-        readonly private AppDbContext context;
-        private AppDbContext context1;
-
-        public WriteRepository(AppDbContext context)
+        private readonly Context context;
+        public WriteRepository(Context context)
         {
             this.context = context;
         }

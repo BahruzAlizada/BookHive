@@ -4,7 +4,7 @@ using BookHive.Application.CustomAttributes;
 using BookHive.Application.Registration;
 using BookHive.Domain.Identity;
 using BookHive.Infrastructure.Registration;
-using BookHive.Persistence.Context;
+using BookHive.Persistence.Concrete;
 using BookHive.Persistence.Registration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
@@ -48,12 +48,12 @@ builder.Services.AddIdentity<AppUser, AppRole>(Identityoptions =>
     Identityoptions.Lockout.AllowedForNewUsers = true;
     Identityoptions.Lockout.MaxFailedAccessAttempts = 5;
     Identityoptions.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
-}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+}).AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
 
 Logger log = new LoggerConfiguration()
     .WriteTo.Console()
     .WriteTo.File("logs/log.txt")
-    .WriteTo.MSSqlServer(connectionString: AppDbContext.SqlConnection, tableName: "Logs", autoCreateSqlTable: true)
+    .WriteTo.MSSqlServer(connectionString: Context.SqlConnection, tableName: "Logs", autoCreateSqlTable: true)
     .Enrich.FromLogContext()
     .CreateLogger();
 

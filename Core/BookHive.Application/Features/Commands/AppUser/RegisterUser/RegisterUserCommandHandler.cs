@@ -1,4 +1,4 @@
-﻿using BookHive.Application.ConstMessages;
+﻿using BookHive.Application.Constants;
 using BookHive.Application.Extensions.FluentValidationExtension;
 using BookHive.Application.Validation.FluentValidation.UserValidator;
 using BookHive.Domain.Identity;

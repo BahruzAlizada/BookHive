@@ -1,12 +1,12 @@
-﻿
-
-using AutoMapper;
-using BookHive.Application.Abstracts.Services;
-using BookHive.Application.ConstMessages;
+﻿using BookHive.Application.Abstracts.Services;
+using BookHive.Application.Constants;
+using BookHive.Application.DTOs;
 using BookHive.Application.Extensions.FluentValidationExtension;
+using BookHive.Application.Parametres.ResponseParametres;
 using BookHive.Application.Rule;
 using BookHive.Application.Rules.Abstract;
 using BookHive.Application.Validation.FluentValidation.BookValidator;
+using Mapster;
 using MediatR;
 
 namespace BookHive.Application.Features.Commands.Book.CreateBook
@@ -15,52 +15,46 @@ namespace BookHive.Application.Features.Commands.Book.CreateBook
     {
         private readonly IBookWriteRepository bookWriteRepository;
         private readonly IBookRuleService bookRuleService;
-        private readonly IMapper mapper;
-        public CreateBookCommandHandler(IBookWriteRepository bookWriteRepository, IBookRuleService bookRuleService, IMapper mapper)
+        public CreateBookCommandHandler(IBookWriteRepository bookWriteRepository, IBookRuleService bookRuleService)
         {
             this.bookWriteRepository = bookWriteRepository; 
             this.bookRuleService = bookRuleService;
-            this.mapper = mapper;
         }
 
 
         public async Task<CreateBookCommandResponse> Handle(CreateBookCommandRequest request, CancellationToken cancellationToken)
         {
-            var validationResult = await new BookAddValidator().ValidateAsync(request.BookAddDto);
-            if (!validationResult.IsValid)
-            {
-                return new CreateBookCommandResponse
-                {
-                    Result = new Parametres.ResponseParametres.Result
-                    {
-                        Success = false,
-                        Message = validationResult.ValidationErrorString()
-                    }
-                };
-            }
+            var validationResult = await ValidationExtension.ValidatorResult(new BookAddValidator(), request.BookAddDto);
+            if (!validationResult.Success) return new() { Result = validationResult };
 
-            var result = BusinessRules.Run(bookRuleService.CheckIfISBNExisted(request.BookAddDto.ISBN));
-            if(!result.Success)
-            {
-                return new CreateBookCommandResponse
-                {
-                    Result = result
-                };
-            }
+     
+            var result = await CheckBusinessRules(request.BookAddDto);
+            if(!result.Success) return new() { Result = result };
 
-            BookHive.Domain.Entities.Book book = mapper.Map<BookHive.Domain.Entities.Book>(request.BookAddDto);
-
-            await bookWriteRepository.AddAsync(book);
-            await bookWriteRepository.SaveAsync();
-
-            return new CreateBookCommandResponse
-            {
-                Result = new Parametres.ResponseParametres.Result
-                {
-                    Success = true,
-                    Message = Messages.SuccessAdded
-                }
-            };
+            
+            await bookWriteRepository.AddBookAsync(request.BookAddDto);
+            return new CreateBookCommandResponse() { Result = new SuccessResult(Messages.SuccessAdded) };
         }
+
+
+
+        private async Task<Result> CheckBusinessRules(BookAddDto bookAddDto)
+        {
+            var result = BusinessRules.Run
+                (
+                    bookRuleService.CheckIfISBNExisted(bookAddDto.ISBN),
+                    bookRuleService.CheckPrice(bookAddDto.Price),
+                    bookRuleService.CheckQuantity(bookAddDto.Quantity),
+                    bookRuleService.CheckPages(bookAddDto.Pages),
+                    bookRuleService.CheckBookLanguage((int)bookAddDto.BookLanguage),
+                    await bookRuleService.CheckAuthorId(bookAddDto.AuthorId),
+                    await bookRuleService.CheckGenreId(bookAddDto.GenreId),
+                    await bookRuleService.CheckPublisherId(bookAddDto.PublisherId)
+                );
+            if (!result.Success) return result;
+
+            return new Result { Success = true };
+        }
+
     }
 }

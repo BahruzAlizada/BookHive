@@ -1,6 +1,6 @@
 ﻿using BookHive.Application.Repositories;
 using BookHive.Domain.Common;
-using BookHive.Persistence.Context;
+using BookHive.Persistence.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 using System.Linq.Expressions;
@@ -9,8 +9,8 @@ namespace BookHive.Persistence.Repositories
 {
     public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity
     {
-        private readonly AppDbContext context;
-        public ReadRepository(AppDbContext context)
+        private readonly Context context;
+        public ReadRepository(Context context)
         {
             this.context = context;
         }
@@ -46,5 +46,10 @@ namespace BookHive.Persistence.Repositories
             return await query.FirstOrDefaultAsync(data => data.Id == Guid.Parse(id));
         }
 
+        public async Task<T> GetFindAsync(Guid id)
+        {
+            var query = await Table.FindAsync(id);
+            return query;
+        }
     }
 }

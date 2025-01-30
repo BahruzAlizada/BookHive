@@ -1,7 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using System.Text;
-using BookHive.Application.Abstracts.Services;
+using BookHive.Application.Abstracts;
 using BookHive.Application.DTOs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -29,7 +29,7 @@ public class TokenHandler : ITokenHandler
 
         JwtSecurityToken jwtSecurityToken = new JwtSecurityToken
             (
-                 audience: configuration["Token:Audience"],
+                audience: configuration["Token:Audience"],
                 issuer: configuration["Token:Issuer"],
                 expires: tokenDto.Expiration,
                 notBefore: DateTime.UtcNow,

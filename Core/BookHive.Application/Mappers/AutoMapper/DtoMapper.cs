@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BookHive.Application.DTOs;
-using BookHive.Application.DTOs;
 using BookHive.Application.DTOs.Category;
 using BookHive.Domain.Entities;
 using BookHive.Domain.Identity;
@@ -15,13 +14,6 @@ namespace BookHive.Application.Mappers.AutoMapper
             CreateMap<Category,CategoryUpdateDto>().ReverseMap();
             CreateMap<Category,CategoryDto>().ReverseMap();
 
-            CreateMap<BookStatus,BookStatusAddDto>().ReverseMap();
-            CreateMap<BookStatus, BookStatusUpdateDto>().ReverseMap();
-            CreateMap<BookStatus, BookStatusDto>().ReverseMap();
-
-            CreateMap<BookLanguage,BookLanguageAddDto>().ReverseMap();
-            CreateMap<BookLanguage,BookLanguageUpdateDto>().ReverseMap();
-            CreateMap<BookLanguage,BookLanguageDto>().ReverseMap();
 
             CreateMap<Publisher,PublisherAddDto>().ReverseMap();
             CreateMap<Publisher, PublisherUpdateDto>().ReverseMap();

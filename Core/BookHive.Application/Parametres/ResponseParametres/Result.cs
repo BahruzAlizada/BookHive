@@ -1,6 +1,4 @@
-﻿
-
-namespace BookHive.Application.Parametres.ResponseParametres
+﻿namespace BookHive.Application.Parametres.ResponseParametres
 {
     public record Result
     {

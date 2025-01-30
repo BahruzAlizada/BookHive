@@ -1,16 +1,18 @@
 ﻿using BookHive.Domain.Common;
+using BookHive.Domain.Enums;
 
 namespace BookHive.Domain.Entities
 {
     public class Book : BaseEntity
     {
         public string Title { get; set; }
-        public string ISBN {  get; set; }
         public string Description { get; set; }
-        public string CoverImageUrl { get; set; }
+        public string? CoverImageUrl { get; set; }
         public int Pages { get; set; }
-        public bool Status { get; set; } = true;
+        public string ISBN {  get; set; }
 
+        public int Quantity { get; set; }
+        public double Price { get; set; }
 
 
         public Guid GenreId { get; set; }
@@ -22,10 +24,13 @@ namespace BookHive.Domain.Entities
         public Guid PublisherId { get; set; }
         public Publisher Publisher { get; set; }
 
-        public Guid BookLanguageId { get; set; }    
-        public BookLanguage BookLanguage { get; set; }
 
-        public Guid BookStatusId {  get; set; }
-        public BookStatus BookStatus { get; set; }
+
+        public BookLanguage BookLanguage { get; set; }
+        public BookStatus? BookStatus { get; set; }
+
+        public ICollection<Review> Reviews { get; set; }
+        public BookStatistics BookStatistics { get; set; }
+        public BookDiscount BookDiscount { get; set; }
     }
 }

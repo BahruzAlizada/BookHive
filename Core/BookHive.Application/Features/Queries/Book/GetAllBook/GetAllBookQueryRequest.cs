@@ -1,4 +1,4 @@
-﻿using BookHive.Application.DTOs.Book;
+﻿using BookHive.Application.DTOs;
 using BookHive.Application.Parametres.RequestParametres;
 using MediatR;
 

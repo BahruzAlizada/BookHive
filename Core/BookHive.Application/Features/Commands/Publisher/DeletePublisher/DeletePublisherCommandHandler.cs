@@ -1,7 +1,6 @@
-﻿
-
-using BookHive.Application.Abstracts.Services;
-using BookHive.Application.ConstMessages;
+﻿using BookHive.Application.Abstracts.Services;
+using BookHive.Application.Constants;
+using BookHive.Application.Parametres.ResponseParametres;
 using MediatR;
 
 namespace BookHive.Application.Features.Commands.Publisher.DeletePublisher
@@ -19,30 +18,14 @@ namespace BookHive.Application.Features.Commands.Publisher.DeletePublisher
 
         public async Task<DeletePublisherCommandResponse> Handle(DeletePublisherCommandRequest request, CancellationToken cancellationToken)
         {
-            BookHive.Domain.Entities.Publisher? publisher = await publisherReadRepository.GetSingleAsync(x=>x.Id == request.Id);
-            if (publisher is null)
-            {
-                return new DeletePublisherCommandResponse
-                {
-                    Result = new Parametres.ResponseParametres.Result
-                    {
-                        Success = false,
-                        Message = Messages.IdNull
-                    }
-                };
-            }
+            BookHive.Domain.Entities.Publisher? publisher = await publisherReadRepository.GetFindAsync(request.Id);
+            if (publisher is null) return new() { Result = new ErrorResult(Messages.IdNull) };
+            
 
             publisherWriteRepository.Remove(publisher);
             await publisherWriteRepository.SaveAsync();
-
-            return new DeletePublisherCommandResponse
-            {
-                Result = new Parametres.ResponseParametres.Result
-                {
-                    Success = true,
-                    Message = Messages.SuccessDeleted
-                }
-            };
+            return new DeletePublisherCommandResponse { Result = new SuccessResult(Messages.SuccessDeleted) };
+           
         }
     }
 }

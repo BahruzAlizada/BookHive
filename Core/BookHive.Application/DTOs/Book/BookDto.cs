@@ -1,6 +1,6 @@
 ﻿
 
-namespace BookHive.Application.DTOs.Book
+namespace BookHive.Application.DTOs
 {
     public class BookDto 
     {

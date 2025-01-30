@@ -12,9 +12,6 @@ namespace BookHive.Application.Validation.FluentValidation.AuthorValidator
 
             RuleFor(x => x.Bio)
                 .NotEmpty().WithMessage("Müəllif haqqında yazı boş ola bilməz");
-
-            RuleFor(x => x.ProfilePictureUrl)
-                .NotEmpty().WithMessage("Müəllif şəkli boş ola bilməz");
         }
     }
 }

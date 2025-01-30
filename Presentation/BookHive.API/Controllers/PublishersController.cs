@@ -33,9 +33,9 @@ namespace BookHive.API.Controllers
         }
         #endregion
 
-        #region GetByIdPublisher
-        [HttpGet("GetByIdPublisher")]
-        public async Task<IActionResult> GetByIdPublisher([FromQuery] GetByIdPublisheQueryRequest getByIdPublisheQueryRequest)
+        #region GetPublisher
+        [HttpGet("GetPublisher")]
+        public async Task<IActionResult> GetPublisher([FromQuery] GetByIdPublisheQueryRequest getByIdPublisheQueryRequest)
         {
             GetByIdPublisherQueryResponse getByIdPublisherQueryResponse = await mediator.Send(getByIdPublisheQueryRequest);
             return Ok(getByIdPublisherQueryResponse);

@@ -8,7 +8,6 @@ namespace BookHive.Domain.Entities
         public string Name { get; set; }
         public string Address { get; set; }
         public string ContactNumber { get; set; }
-        public bool Status { get; set; } = true;
 
         public ICollection<Book> Books { get; set; }
     }

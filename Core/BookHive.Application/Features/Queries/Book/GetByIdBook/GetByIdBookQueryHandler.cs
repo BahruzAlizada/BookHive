@@ -1,7 +1,7 @@
 ﻿
 using BookHive.Application.Abstracts.Services;
-using BookHive.Application.ConstMessages;
-using BookHive.Application.DTOs.Book;
+using BookHive.Application.Constants;
+using BookHive.Application.DTOs;
 using MediatR;
 
 namespace BookHive.Application.Features.Queries.Book.GetByIdBook
@@ -17,29 +17,29 @@ namespace BookHive.Application.Features.Queries.Book.GetByIdBook
 
         public async Task<GetByIdBookQueryResponse> Handle(GetByIdBookQueryRequest request, CancellationToken cancellationToken)
         {
-            BookDto? bookDto = await bookReadRepository.GetBookAsync(request.Id);
-            if(bookDto == null)
-            {
-                return new GetByIdBookQueryResponse
-                {
-                    Result = new Parametres.ResponseParametres.Result
-                    {
-                        Success = false,
-                        Message = Messages.IdNull
-                    }
-                };
-            }
+            //BookDto? bookDto = await bookReadRepository.GetBookAsync(request.Id);
+            //if(bookDto == null)
+            //{
+            //    return new GetByIdBookQueryResponse
+            //    {
+            //        Result = new Parametres.ResponseParametres.Result
+            //        {
+            //            Success = false,
+            //            Message = Messages.IdNull
+            //        }
+            //    };
+            //}
 
-            return new GetByIdBookQueryResponse
-            {
-                BookDto = bookDto,
-                Result = new Parametres.ResponseParametres.Result
-                {
-                    Success = true,
-                    Message = Messages.SuccessGetFiltered
-                }
-            };
-
+            //return new GetByIdBookQueryResponse
+            //{
+            //    BookDto = bookDto,
+            //    Result = new Parametres.ResponseParametres.Result
+            //    {
+            //        Success = true,
+            //        Message = Messages.SuccessGetFiltered
+            //    }
+            //};
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿
-
-using BookHive.Application.Abstracts.Services;
-using BookHive.Application.ConstMessages;
+﻿using BookHive.Application.Abstracts.Services;
+using BookHive.Application.Constants;
 using BookHive.Application.DTOs;
+using BookHive.Application.Parametres.ResponseParametres;
+using Mapster;
 using MediatR;
 
 namespace BookHive.Application.Features.Queries.Publisher.GetByIdPublisher
@@ -18,29 +18,11 @@ namespace BookHive.Application.Features.Queries.Publisher.GetByIdPublisher
 
         public async Task<GetByIdPublisherQueryResponse> Handle(GetByIdPublisheQueryRequest request, CancellationToken cancellationToken)
         {
-            PublisherDto? publisherDto = await publisherReadRepository.GetPublisherDtosAsync(request.Id);
-            if (publisherDto == null)
-            {
-                return new GetByIdPublisherQueryResponse
-                {
-                    Result = new Parametres.ResponseParametres.Result
-                    {
-                        Success = false,
-                        Message = Messages.IdNull
-                    }
-                };
-            }
-            
+            BookHive.Domain.Entities.Publisher? publisher = await publisherReadRepository.GetFindAsync(request.Id);
+            if (publisher == null) return new() { Result = new ErrorResult(Messages.IdNull) };
 
-            return new GetByIdPublisherQueryResponse
-            {
-                PublisherDto = publisherDto,
-                Result = new Parametres.ResponseParametres.Result
-                {
-                    Success = false,
-                    Message = Messages.SuccessGetFiltered
-                }
-            };
+            PublisherDto publisherDto = publisher.Adapt<PublisherDto>();
+            return new GetByIdPublisherQueryResponse { PublisherDto = publisherDto, Result = new SuccessResult(Messages.SuccessGetFiltered) };
         }
     }
 }

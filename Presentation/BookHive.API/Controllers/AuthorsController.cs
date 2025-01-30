@@ -1,5 +1,5 @@
 ﻿using BookHive.Application.Abstracts.Services;
-using BookHive.Application.ConstMessages;
+using BookHive.Application.Constants;
 using BookHive.Application.CustomAttributes;
 using BookHive.Application.Features.Commands.Author.CreateAuthor;
 using BookHive.Application.Features.Commands.Author.DeleteAuthor;
@@ -37,9 +37,9 @@ namespace BookHive.API.Controllers
         }
         #endregion
 
-        #region GetByIdAuthor
-        [HttpGet("GetByIdAuthor")]
-        public async Task<IActionResult> GetByIdAuthor([FromQuery] GetAuthorByIdQueryRequest getAuthorByIdQueryRequest)
+        #region GetAuthor
+        [HttpGet("GetAuthor")]
+        public async Task<IActionResult> GetAuthor([FromQuery] GetAuthorByIdQueryRequest getAuthorByIdQueryRequest)
         {
             GetAuthorByIdQueryResponse getAuthorByIdQueryResponse = await mediator.Send(getAuthorByIdQueryRequest);
             return Ok(getAuthorByIdQueryResponse);

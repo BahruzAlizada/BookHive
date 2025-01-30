@@ -1,5 +1,5 @@
 ﻿
-using BookHive.Application.DTOs.Book;
+using BookHive.Application.DTOs;
 using BookHive.Application.Parametres.ResponseParametres;
 
 namespace BookHive.Application.Features.Queries.Book.GetByIdBook

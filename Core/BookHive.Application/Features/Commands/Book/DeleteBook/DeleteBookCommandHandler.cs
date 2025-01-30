@@ -1,7 +1,6 @@
-﻿
-
-using BookHive.Application.Abstracts.Services;
-using BookHive.Application.ConstMessages;
+﻿using BookHive.Application.Abstracts.Services;
+using BookHive.Application.Constants;
+using BookHive.Application.Parametres.ResponseParametres;
 using MediatR;
 
 namespace BookHive.Application.Features.Commands.Book.DeleteBook
@@ -20,31 +19,13 @@ namespace BookHive.Application.Features.Commands.Book.DeleteBook
 
         public async Task<DeleteBookCommandResponse> Handle(DeleteBookCommandRequest request, CancellationToken cancellationToken)
         {
-            BookHive.Domain.Entities.Book? book = await bookReadRepository.GetSingleAsync(x=>x.Id==request.Id);
-            if (book == null)
-            {
-                return new DeleteBookCommandResponse
-                {
-                    Result = new Parametres.ResponseParametres.Result
-                    {
-                        Success = false,
-                        Message = Messages.IdNull
-                    }
-                };
-            }
+            BookHive.Domain.Entities.Book? book = await bookReadRepository.GetFindAsync(request.Id);
+            if (book == null) return new() { Result = new ErrorResult(Messages.IdNull) };
+           
 
             bookWriteRepository.Remove(book);
             await bookWriteRepository.SaveAsync();
-
-            return new DeleteBookCommandResponse
-            {
-                Result = new Parametres.ResponseParametres.Result
-                {
-                    Success = true,
-                    Message = Messages.SuccessDeleted
-                }
-            };
-
+            return new DeleteBookCommandResponse { Result = new SuccessResult(Messages.SuccessDeleted) };
         }
     }
 }

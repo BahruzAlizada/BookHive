@@ -14,13 +14,9 @@ namespace BookHive.API.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly ICategoryReadRepository categoryReadRepository;
-        private readonly ICategoryWriteRepository categoryWriteRepository;
         private readonly IMediator mediator;
-        public CategoriesController(ICategoryReadRepository categoryReadRepository, ICategoryWriteRepository categoryWriteRepository, IMediator mediator)
+        public CategoriesController(IMediator mediator)
         {
-            this.categoryReadRepository = categoryReadRepository;
-            this.categoryWriteRepository = categoryWriteRepository;
             this.mediator = mediator;
         }
 
@@ -33,9 +29,9 @@ namespace BookHive.API.Controllers
         }
         #endregion
 
-        #region GetByIdCategory
-        [HttpGet("GetByIdCategory")]
-        public async Task<IActionResult> GetByIdCategory([FromQuery] GetByIdCategoryQueryRequest getByIdCategoryQueryRequest)
+        #region GetCategory
+        [HttpGet("GetCategory")]
+        public async Task<IActionResult> GetCategory([FromQuery] GetByIdCategoryQueryRequest getByIdCategoryQueryRequest)
         {
             GetByIdCategoryQueryResponse getByIdCategoryQueryResponse = await mediator.Send(getByIdCategoryQueryRequest);
             return Ok(getByIdCategoryQueryResponse);

@@ -1,8 +1,6 @@
-﻿
-
-using BookHive.Application.Abstracts.Services;
-using BookHive.Application.ConstMessages;
-using BookHive.Application.DTOs.Book;
+﻿using BookHive.Application.Abstracts.Services;
+using BookHive.Application.Constants;
+using BookHive.Application.DTOs;
 using MediatR;
 
 namespace BookHive.Application.Features.Queries.Book.GetAllBook
@@ -18,17 +16,18 @@ namespace BookHive.Application.Features.Queries.Book.GetAllBook
 
         public async Task<GetAllBookQueryResponse> Handle(GetAllBookQueryRequest request, CancellationToken cancellationToken)
         {
-            List<BookDto> bookDtos = await bookReadRepository.GetBookDtosAsync();
+            //List<BookDto> bookDtos = await bookReadRepository.GetBookDtosAsync();
 
-            return new GetAllBookQueryResponse
-            {
-                BookDtos = bookDtos,
-                Result = new Parametres.ResponseParametres.Result
-                {
-                    Success = true,
-                    Message = Messages.SuccessListed
-                }
-            };
+            //return new GetAllBookQueryResponse
+            //{
+            //    BookDtos = bookDtos,
+            //    Result = new Parametres.ResponseParametres.Result
+            //    {
+            //        Success = true,
+            //        Message = Messages.SuccessListed
+            //    }
+            //};
+            throw new NotImplementedException();
         }
     }
 }

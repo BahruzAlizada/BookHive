@@ -1,6 +1,6 @@
 ﻿using BookHive.Application.Abstracts.Services;
 using BookHive.Persistence.Concrete;
-using BookHive.Persistence.Context;
+using BookHive.Persistence.Services.EntityFramework;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BookHive.Persistence.Registration
@@ -9,16 +9,10 @@ namespace BookHive.Persistence.Registration
     {
         public static void AddPersistenceServices(this IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>();
+            services.AddDbContext<Context>();
 
             services.AddScoped<ICategoryReadRepository, CategoryReadRepository>();
             services.AddScoped<ICategoryWriteRepository, CategoryWriteRepository>();
-
-            services.AddScoped<IBookLanguageReadRepository, BookLanguageReadRepository>();
-            services.AddScoped<IBookLanguageWriteRepository, BookLanguageWriteRepository>();    
-
-            services.AddScoped<IBookStatusReadRepository, BookStatusReadRepository>();
-            services.AddScoped<IBookStatusWriteRepository, BookStatusWriteRepository>();
 
             services.AddScoped<IPublisherReadRepository, PublisherReadRepository>();
             services.AddScoped<IPublisherWriteRepository, PublisherWriteRepository>();

@@ -1,6 +1,6 @@
-﻿
-using BookHive.Application.Abstracts.Services;
-using BookHive.Application.ConstMessages;
+﻿using BookHive.Application.Abstracts.Services;
+using BookHive.Application.Constants;
+using BookHive.Application.Parametres.ResponseParametres;
 using MediatR;
 
 namespace BookHive.Application.Features.Commands.Category.DeleteCategory
@@ -18,30 +18,13 @@ namespace BookHive.Application.Features.Commands.Category.DeleteCategory
 
         public async Task<DeleteCategoryCommandResponse> Handle(DeleteCategoryCommandRequest request, CancellationToken cancellationToken)
         {
-            BookHive.Domain.Entities.Category? category = await categoryReadRepository.GetSingleAsync(x=>x.Id==request.Id);
-            if (category == null)
-                return new DeleteCategoryCommandResponse
-                {
-                    Result = new Parametres.ResponseParametres.Result
-                    {
-                        Success = false,
-                        Message = Messages.IdNull
-                    }
-                };
-
+            BookHive.Domain.Entities.Category? category = await categoryReadRepository.GetFindAsync(request.Id);
+            if (category == null) return new() { Result = new ErrorResult(Messages.IdNull) };
 
             categoryWriteRepository.Remove(category);
             await categoryWriteRepository.SaveAsync();
 
-            return new DeleteCategoryCommandResponse
-            {
-                Result = new Parametres.ResponseParametres.Result
-                {
-                    Success = true,
-                    Message = Messages.SuccessDeleted
-                }
-            };
-
+            return new() { Result = new SuccessResult(Messages.SuccessDeleted) };
         }
     }
 }

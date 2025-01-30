@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using BookHive.Application.Abstracts.Services;
-using BookHive.Application.ConstMessages;
+using BookHive.Application.Constants;
 using BookHive.Application.DTOs;
+using BookHive.Application.Parametres.ResponseParametres;
+using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,16 +20,10 @@ namespace BookHive.Application.Features.Queries.Publisher.GetAllPublisher
 
         public async Task<GetAllPublisherQueryResponse> Handle(GetAllPublisherQueryRequest request, CancellationToken cancellationToken)
         {
-            List<PublisherDto> publishers = await publisherReadRepository.GetPublisherDtosAsync();
-            return new GetAllPublisherQueryResponse
-            {
-                PublisherDtos = publishers,
-                Result = new Parametres.ResponseParametres.Result
-                {
-                    Success = true,
-                    Message = Messages.SuccessListed
-                }
-            };
+            List<BookHive.Domain.Entities.Publisher> publishers = await publisherReadRepository.GetAll().ToListAsync();
+            List<PublisherDto> publisherDtos = publishers.Adapt<List<PublisherDto>>();
+
+            return new GetAllPublisherQueryResponse { PublisherDtos = publisherDtos, Result = new SuccessResult(Messages.SuccessListed) };
         }
     }
 }

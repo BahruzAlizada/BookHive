@@ -1,5 +1,5 @@
 ﻿using BookHive.Application.Abstracts.Services;
-using BookHive.Application.ConstMessages;
+using BookHive.Application.Constants;
 using BookHive.Application.Parametres.ResponseParametres;
 using BookHive.Application.Rules.Abstract;
 using BookHive.Domain.Common;
@@ -20,14 +20,9 @@ namespace BookHive.Application.Rules.Concrete
             if (id.HasValue)
             {
                 var categoryExist = categoryReadRepository.GetAll(false).Any(x => x.Name == name && x.Id != id.Value);
-
                 if (categoryExist)
                 {
-                    return new Result
-                    {
-                        Success = false,
-                        Message = Messages.CheckIfNameExisted
-                    };
+                    return new ErrorResult(Messages.CheckIfNameExisted);
                 }
             }
             else
@@ -35,18 +30,11 @@ namespace BookHive.Application.Rules.Concrete
                 var categoryExist = categoryReadRepository.GetAll(false).Any(x => x.Name == name);
                 if (categoryExist)
                 {
-                    return new Result
-                    {
-                        Success = false,
-                        Message = Messages.CheckIfNameExisted
-                    };
+                    return new ErrorResult(Messages.CheckIfNameExisted);
                 }
             }
 
-            return new Result
-            {
-                Success = true,
-            };
+            return new Result { Success = true };
         }
 
 

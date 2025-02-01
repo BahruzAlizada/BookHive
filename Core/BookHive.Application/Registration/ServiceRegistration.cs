@@ -26,6 +26,8 @@ namespace BookHive.Application.Registration
             services.AddScoped<IGenreRuleService,GenreRuleService>();
             services.AddScoped<IAuthorRuleService,AuthorRuleService>();
             services.AddScoped<IBookRuleService,BookRuleService>();
+            services.AddScoped<IReviewRuleService,ReviewRuleService>();
+            services.AddScoped<IDiscountRuleService,DiscountRuleService>();
         }
     }
 }

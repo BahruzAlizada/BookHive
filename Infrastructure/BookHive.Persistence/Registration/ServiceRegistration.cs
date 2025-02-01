@@ -26,11 +26,18 @@ namespace BookHive.Persistence.Registration
             services.AddScoped<IBookReadRepository, BookReadRepository>();
             services.AddScoped<IBookWriteRepository, BookWriteRepository>();
 
+            services.AddScoped<IReviewReadRepository, ReviewReadRepository>();
+            services.AddScoped<IReviewWriteRepository, ReviewWriteRepository>();
+
             services.AddScoped<IEndpointReadRepository, EndpointReadRepository>();
             services.AddScoped<IEndpointWriteRepository, EndpointWriteRepository>();
 
             services.AddScoped<IMenuReadRepository, MenuReadRepository>();
             services.AddScoped<IMenuWriteRepository, MenuWriteRepository>();
+
+            services.AddScoped<IDiscountReadRepository, DiscountReadRepository>();
+            services.AddScoped<IDiscountWriteRepository, DiscountWriteRepository>();
+            
         }
     }
 }

@@ -10,8 +10,8 @@ namespace BookHive.Domain.Entities
         public Guid? GenreId { get; set; }
         public Genre? Genre { get; set; }
 
-        public double DiscountPrice { get; set; } // Endirimli qiymət
         public int DiscountPercentage { get; set; } // Endirim faizi
         public bool IsDiscount { get; set; } // Endirim aktivdir?
+        public DateTime Created { get; set; } = DateTime.UtcNow.AddHours(4);
     }
 }

@@ -1,5 +1,5 @@
-﻿using BookHive.Application.Abstracts.Services;
-using BookHive.Application.Configurations;
+﻿using BookHive.Application.Abstracts.Configuration;
+using BookHive.Application.Abstracts.Services;
 using BookHive.Domain.Entities;
 using BookHive.Persistence.Concrete;
 using BookHive.Persistence.Repositories;

@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using BookHive.Application.Configurations;
+using BookHive.Application.Abstracts.Configuration;
 using BookHive.Application.CustomAttributes;
 using BookHive.Application.DTOs.Configuration;
 using Microsoft.AspNetCore.Http;

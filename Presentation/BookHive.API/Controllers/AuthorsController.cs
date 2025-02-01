@@ -48,8 +48,8 @@ namespace BookHive.API.Controllers
 
         #region AddAuthor
         [HttpPost("AddAuthor")]
-        [Authorize(AuthenticationSchemes = "Admin")]
-        [AuthorizeDefinition(Menu = AuthorizeDefinitionConstants.Authors, ActionType = Application.Enums.ActionType.Writing,Definition = "Add Author")]
+        //[Authorize(AuthenticationSchemes = "Admin")]
+        //[AuthorizeDefinition(Menu = AuthorizeDefinitionConstants.Authors, ActionType = Application.Enums.ActionType.Writing,Definition = "Add Author")]
         public async Task<IActionResult> AddAuthor([FromBody] CreateAuthorCommandRequest createAuthorCommandRequest)
         {
             CreateAuthorCommandResponse createAuthorCommandResponse = await mediator.Send(createAuthorCommandRequest);

@@ -12,7 +12,9 @@ namespace BookHive.Domain.Entities
         public string ISBN {  get; set; }
 
         public int Quantity { get; set; }
+
         public double Price { get; set; }
+        public double DiscountPrice { get; set; }
 
 
         public Guid GenreId { get; set; }

@@ -4,6 +4,7 @@ using BookHive.Persistence.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookHive.Persistence.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20250201140930_AddColumnDiscountPriceToBooksTable")]
+    partial class AddColumnDiscountPriceToBooksTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,66 +63,6 @@ namespace BookHive.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Authors");
-                });
-
-            modelBuilder.Entity("BookHive.Domain.Entities.Basket", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CouponId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsCompleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsUsedCoupon")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("float");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CouponId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Baskets");
-                });
-
-            modelBuilder.Entity("BookHive.Domain.Entities.BasketItem", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BasketId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BookId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BasketId");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("BasketItems");
                 });
 
             modelBuilder.Entity("BookHive.Domain.Entities.Book", b =>
@@ -193,11 +136,11 @@ namespace BookHive.Persistence.Migrations
                     b.Property<Guid?>("BookId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("DiscountPercentage")
                         .HasColumnType("int");
+
+                    b.Property<double>("DiscountPrice")
+                        .HasColumnType("float");
 
                     b.Property<Guid?>("GenreId")
                         .HasColumnType("uniqueidentifier");
@@ -264,99 +207,6 @@ namespace BookHive.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("BookHive.Domain.Entities.Coupon", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("DiscountAmount")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("DiscountPercentage")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("ExpiryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Coupons");
-                });
-
-            modelBuilder.Entity("BookHive.Domain.Entities.CouponUsage", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CouponId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("UsedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CouponId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("CouponUsages");
-                });
-
-            modelBuilder.Entity("BookHive.Domain.Entities.CreditCard", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("AddedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CardHolderName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EncryptedCVV")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EncryptedCardNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExpiryDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("PaymentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PaymentId")
-                        .IsUnique();
-
-                    b.ToTable("CreditCards");
                 });
 
             modelBuilder.Entity("BookHive.Domain.Entities.Endpoint", b =>
@@ -433,79 +283,6 @@ namespace BookHive.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Menus");
-                });
-
-            modelBuilder.Entity("BookHive.Domain.Entities.Order", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BasketId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsCompleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("OrderCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OrderStatus")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BasketId")
-                        .IsUnique();
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("BookHive.Domain.Entities.Payment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ReceiptUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TransactionId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId")
-                        .IsUnique();
-
-                    b.ToTable("Payment");
                 });
 
             modelBuilder.Entity("BookHive.Domain.Entities.Publisher", b =>
@@ -798,42 +575,6 @@ namespace BookHive.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BookHive.Domain.Entities.Basket", b =>
-                {
-                    b.HasOne("BookHive.Domain.Entities.Coupon", "Coupon")
-                        .WithMany()
-                        .HasForeignKey("CouponId");
-
-                    b.HasOne("BookHive.Domain.Identity.AppUser", "User")
-                        .WithMany("Baskets")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Coupon");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BookHive.Domain.Entities.BasketItem", b =>
-                {
-                    b.HasOne("BookHive.Domain.Entities.Basket", "Basket")
-                        .WithMany("BasketItems")
-                        .HasForeignKey("BasketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BookHive.Domain.Entities.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Basket");
-
-                    b.Navigation("Book");
-                });
-
             modelBuilder.Entity("BookHive.Domain.Entities.Book", b =>
                 {
                     b.HasOne("BookHive.Domain.Entities.Author", "Author")
@@ -887,36 +628,6 @@ namespace BookHive.Persistence.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("BookHive.Domain.Entities.CouponUsage", b =>
-                {
-                    b.HasOne("BookHive.Domain.Entities.Coupon", "Coupon")
-                        .WithMany("CouponUsages")
-                        .HasForeignKey("CouponId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BookHive.Domain.Identity.AppUser", "User")
-                        .WithMany("CouponUsages")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Coupon");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BookHive.Domain.Entities.CreditCard", b =>
-                {
-                    b.HasOne("BookHive.Domain.Entities.Payment", "Payment")
-                        .WithOne("CreditCard")
-                        .HasForeignKey("BookHive.Domain.Entities.CreditCard", "PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Payment");
-                });
-
             modelBuilder.Entity("BookHive.Domain.Entities.Endpoint", b =>
                 {
                     b.HasOne("BookHive.Domain.Entities.Menu", "Menu")
@@ -937,28 +648,6 @@ namespace BookHive.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("BookHive.Domain.Entities.Order", b =>
-                {
-                    b.HasOne("BookHive.Domain.Entities.Basket", "Basket")
-                        .WithOne("Order")
-                        .HasForeignKey("BookHive.Domain.Entities.Order", "BasketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Basket");
-                });
-
-            modelBuilder.Entity("BookHive.Domain.Entities.Payment", b =>
-                {
-                    b.HasOne("BookHive.Domain.Entities.Order", "Order")
-                        .WithOne("Payment")
-                        .HasForeignKey("BookHive.Domain.Entities.Payment", "OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("BookHive.Domain.Entities.Review", b =>
@@ -1040,14 +729,6 @@ namespace BookHive.Persistence.Migrations
                     b.Navigation("Books");
                 });
 
-            modelBuilder.Entity("BookHive.Domain.Entities.Basket", b =>
-                {
-                    b.Navigation("BasketItems");
-
-                    b.Navigation("Order")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("BookHive.Domain.Entities.Book", b =>
                 {
                     b.Navigation("BookDiscount")
@@ -1064,11 +745,6 @@ namespace BookHive.Persistence.Migrations
                     b.Navigation("Genres");
                 });
 
-            modelBuilder.Entity("BookHive.Domain.Entities.Coupon", b =>
-                {
-                    b.Navigation("CouponUsages");
-                });
-
             modelBuilder.Entity("BookHive.Domain.Entities.Genre", b =>
                 {
                     b.Navigation("Books");
@@ -1079,18 +755,6 @@ namespace BookHive.Persistence.Migrations
             modelBuilder.Entity("BookHive.Domain.Entities.Menu", b =>
                 {
                     b.Navigation("Endpoints");
-                });
-
-            modelBuilder.Entity("BookHive.Domain.Entities.Order", b =>
-                {
-                    b.Navigation("Payment")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BookHive.Domain.Entities.Payment", b =>
-                {
-                    b.Navigation("CreditCard")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("BookHive.Domain.Entities.Publisher", b =>
@@ -1105,10 +769,6 @@ namespace BookHive.Persistence.Migrations
 
             modelBuilder.Entity("BookHive.Domain.Identity.AppUser", b =>
                 {
-                    b.Navigation("Baskets");
-
-                    b.Navigation("CouponUsages");
-
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618

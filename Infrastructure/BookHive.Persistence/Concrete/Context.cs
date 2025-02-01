@@ -22,6 +22,12 @@ namespace BookHive.Persistence.Concrete
         public DbSet<Review> Reviews { get; set; }
         public DbSet<BookDiscount> BookDiscounts { get; set; }
         public DbSet<BookStatistics> BookStatistics { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
+        public DbSet<CouponUsage> CouponUsages { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<CreditCard> CreditCards { get; set; }
 
 
         public DbSet<Menu> Menus { get; set; }

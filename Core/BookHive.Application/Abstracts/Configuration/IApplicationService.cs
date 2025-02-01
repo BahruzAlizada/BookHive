@@ -1,6 +1,6 @@
 ﻿using BookHive.Application.DTOs.Configuration;
 
-namespace BookHive.Application.Configurations
+namespace BookHive.Application.Abstracts.Configuration
 {
     public interface IApplicationService
     {

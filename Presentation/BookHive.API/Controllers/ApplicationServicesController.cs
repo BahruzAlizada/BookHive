@@ -1,4 +1,4 @@
-﻿using BookHive.Application.Configurations;
+﻿using BookHive.Application.Abstracts.Configuration;
 using BookHive.Application.Constants;
 using BookHive.Application.CustomAttributes;
 using Microsoft.AspNetCore.Authorization;

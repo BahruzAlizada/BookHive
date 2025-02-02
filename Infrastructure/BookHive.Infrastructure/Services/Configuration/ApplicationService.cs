@@ -5,7 +5,7 @@ using BookHive.Application.DTOs.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc;
-using BookHive.Application.Enums;
+using BookHive.Domain.Enums;
 
 namespace BookHive.Infrastructure.Services.Configuration
 {

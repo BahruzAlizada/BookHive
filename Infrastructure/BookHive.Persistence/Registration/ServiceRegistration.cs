@@ -1,4 +1,4 @@
-﻿using BookHive.Application.Abstracts.Services;
+﻿using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Persistence.Concrete;
 using BookHive.Persistence.Services.EntityFramework;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,6 +46,9 @@ namespace BookHive.Persistence.Registration
 
             services.AddScoped<IBasketItemReadRepository, BasketItemReadRepository>();
             services.AddScoped<IBasketItemWriteRepository, BasketItemWriteRepository>();
+
+            services.AddScoped<IOrderReadRepository, OrderReadRepository>();
+            services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
 
         }
     }

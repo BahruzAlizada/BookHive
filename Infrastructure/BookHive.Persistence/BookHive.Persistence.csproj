@@ -32,4 +32,9 @@
     <ProjectReference Include="..\..\Core\BookHive.Application\BookHive.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Dapper\" />
+    <Folder Include="Services\ServiceContracts\" />
+  </ItemGroup>
+
 </Project>

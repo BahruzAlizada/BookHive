@@ -1,4 +1,4 @@
-﻿using BookHive.Application.Abstracts.Services;
+﻿using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Application.Constants;
 using BookHive.Application.CustomAttributes;
 using BookHive.Application.Features.Commands.Author.CreateAuthor;
@@ -60,7 +60,7 @@ namespace BookHive.API.Controllers
         #region UpdateAuthor
         [HttpPut("UpdateAuthor")]
         [Authorize(AuthenticationSchemes = "Admin")]
-        [AuthorizeDefinition(Menu = AuthorizeDefinitionConstants.Authors, ActionType = Application.Enums.ActionType.Updateing, Definition = "Update Author")]
+        [AuthorizeDefinition(Menu = AuthorizeDefinitionConstants.Authors, ActionType = Domain.Enums.ActionType.Updateing, Definition = "Update Author")]
         public async Task<IActionResult> UpdateAuthor([FromBody] UpdateAuthorCommandRequest updateAuthorCommandRequest)
         {
             UpdateAuthorCommandResponse updateAuthorCommandResponse = await mediator.Send(updateAuthorCommandRequest);
@@ -71,7 +71,7 @@ namespace BookHive.API.Controllers
         #region DeleteAuthor
         [HttpDelete("DeleteAuthor")]
         [Authorize(AuthenticationSchemes = "Admin")]
-        [AuthorizeDefinition(Menu = AuthorizeDefinitionConstants.Authors, ActionType = Application.Enums.ActionType.Deleting, Definition = "Delete Author")]
+        [AuthorizeDefinition(Menu = AuthorizeDefinitionConstants.Authors, ActionType = Domain.Enums.ActionType.Deleting, Definition = "Delete Author")]
         public async Task<IActionResult> DeleteAuthor([FromQuery] DeleteAuthorCommandRequest deleteAuthorCommandRequest)
         {
             DeleteAuthorCommandResponse deleteAuthorCommandResponse = await mediator.Send(deleteAuthorCommandRequest);

@@ -1,4 +1,4 @@
-﻿using BookHive.Application.Abstracts.Services;
+﻿using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Application.CustomAttributes;
 using BookHive.Application.Features.Commands.Genre.CreateGenre;
 using BookHive.Application.Features.Commands.Genre.DeleteGenre;
@@ -15,13 +15,9 @@ namespace BookHive.API.Controllers
     [ApiController]
     public class GenresController : ControllerBase
     {
-        private readonly IGenreReadRepository genreReadRepository;
-        private readonly IGenreWriteRepository genreWriteRepository;
         private readonly IMediator mediator;
-        public GenresController(IGenreReadRepository genreReadRepository, IGenreWriteRepository genreWriteRepository, IMediator mediator)
+        public GenresController(IMediator mediator)
         {
-            this.genreReadRepository = genreReadRepository;
-            this.genreWriteRepository = genreWriteRepository;
             this.mediator = mediator;
         }
 

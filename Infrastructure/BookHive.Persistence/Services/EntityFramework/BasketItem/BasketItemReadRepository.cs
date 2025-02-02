@@ -1,4 +1,4 @@
-﻿using BookHive.Application.Abstracts.Services;
+﻿using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Domain.Entities;
 using BookHive.Domain.Identity;
 using BookHive.Persistence.Concrete;

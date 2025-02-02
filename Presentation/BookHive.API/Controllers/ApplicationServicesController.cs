@@ -19,7 +19,7 @@ namespace BookHive.API.Controllers
         }
 
         [HttpGet("GetAuthorizeDefinitionEndpoints")]
-        [AuthorizeDefinition(Menu = AuthorizeDefinitionConstants.ApplicationServices, ActionType = Application.Enums.ActionType.Reading, Definition = "Methods that can be called by logging in")]
+        [AuthorizeDefinition(Menu = AuthorizeDefinitionConstants.ApplicationServices, ActionType = Domain.Enums.ActionType.Reading, Definition = "Methods that can be called by logging in")]
         public IActionResult GetAuthorizeDefinitionEndpoints()
         {
             var datas = applicationService.GetAuthorizeDefinitionEndpoints(typeof(Program));

@@ -1,6 +1,4 @@
-﻿
-
-using BookHive.Application.Abstracts.Services;
+﻿using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Application.Constants;
 using BookHive.Application.Parametres.ResponseParametres;
 using BookHive.Application.Rule;

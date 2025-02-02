@@ -1,4 +1,4 @@
-﻿using BookHive.Application.Abstracts.Services;
+﻿using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Application.Features.Commands.Book.CreateBook;
 using BookHive.Application.Features.Commands.Book.DeleteBook;
 using BookHive.Application.Features.Commands.Book.UpdateBook;
@@ -14,13 +14,9 @@ namespace BookHive.API.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly IBookReadRepository bookReadRepository;
-        private readonly IBookWriteRepository bookWriteRepository;
         private readonly IMediator mediator;
-        public BooksController(IBookReadRepository bookReadRepository, IBookWriteRepository bookWriteRepository, IMediator mediator)
+        public BooksController(IMediator mediator)
         {
-            this.bookReadRepository = bookReadRepository;
-            this.bookWriteRepository = bookWriteRepository;
             this.mediator = mediator;
         }
 

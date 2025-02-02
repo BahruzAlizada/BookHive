@@ -1,6 +1,6 @@
 ﻿
 using System.Text;
-using BookHive.Application.Abstracts.Services;
+using BookHive.Application.Abstracts;
 using BookHive.Application.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;

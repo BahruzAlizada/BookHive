@@ -5,7 +5,6 @@ namespace BookHive.Domain.Entities
 {
     public class Order : BaseEntity
     {
-        public string Description { get; set; }
 
         public string OrderCode { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow.AddHours(4);

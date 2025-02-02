@@ -1,9 +1,7 @@
-﻿
-
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
 using System.Text;
-using BookHive.Application.Abstracts.Services;
+using BookHive.Application.Abstracts;
 using Microsoft.Extensions.Configuration;
 
 namespace BookHive.Infrastructure.Services.Mail

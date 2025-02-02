@@ -1,6 +1,4 @@
-﻿
-
-using BookHive.Domain.Common;
+﻿using BookHive.Domain.Common;
 using BookHive.Domain.Enums;
 
 namespace BookHive.Domain.Entities

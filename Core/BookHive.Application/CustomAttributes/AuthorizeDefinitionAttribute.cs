@@ -1,5 +1,4 @@
-﻿
-using BookHive.Application.Enums;
+﻿using BookHive.Domain.Enums;
 
 namespace BookHive.Application.CustomAttributes
 {

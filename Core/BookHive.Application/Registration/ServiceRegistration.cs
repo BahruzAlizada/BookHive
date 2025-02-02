@@ -28,6 +28,8 @@ namespace BookHive.Application.Registration
             services.AddScoped<IBookRuleService,BookRuleService>();
             services.AddScoped<IReviewRuleService,ReviewRuleService>();
             services.AddScoped<IDiscountRuleService,DiscountRuleService>();
+            services.AddScoped<ICouponRuleService,CouponRuleService>();
+            services.AddScoped<IBasketRuleService, BasketRuleService>();
         }
     }
 }

@@ -37,7 +37,16 @@ namespace BookHive.Persistence.Registration
 
             services.AddScoped<IDiscountReadRepository, DiscountReadRepository>();
             services.AddScoped<IDiscountWriteRepository, DiscountWriteRepository>();
+
+            services.AddScoped<ICouponReadRepository, CouponReadRepository>();
+            services.AddScoped<ICouponWriteRepository, CouponWriteRepository>();
             
+            services.AddScoped<IBasketReadRepository, BasketReadRepository>();
+            services.AddScoped<IBasketWriteRepository, BasketWriteRepository>();
+
+            services.AddScoped<IBasketItemReadRepository, BasketItemReadRepository>();
+            services.AddScoped<IBasketItemWriteRepository, BasketItemWriteRepository>();
+
         }
     }
 }

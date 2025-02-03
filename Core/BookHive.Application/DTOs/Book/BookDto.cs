@@ -1,4 +1,4 @@
-﻿
+﻿using BookHive.Domain.Enums;
 
 namespace BookHive.Application.DTOs
 {
@@ -10,6 +10,10 @@ namespace BookHive.Application.DTOs
         public string Description { get; set; }
         public string CoverImageUrl { get; set; }
         public int Pages { get; set; }
+        public int Quantity { get; set; }
+
+        public double Price { get; set; }
+        public double DiscountPrice { get; set; }
 
         public Guid GenreId { get; set; }
         public string GenreName { get; set; }
@@ -17,9 +21,9 @@ namespace BookHive.Application.DTOs
         public string PublisherName { get; set; }
         public Guid AuthorId { get; set; }
         public string AuthorName { get; set; }
-        public Guid BookLanguageId { get; set; }
-        public string BookLanguageName { get; set; }
-        public Guid BookStatusId { get; set; }
-        public string BookStatusName { get; set; }
+        public string BookLanguage { get; set; }
+        public string? BookStatus { get; set; }
+        public double AverageRating { get; set; }
+        public int TotalReview { get; set; }
     }
 }

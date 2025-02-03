@@ -9,5 +9,6 @@ namespace BookHive.Application.Rules.Abstract
         Result CheckBasketItemQuantity(int quantity);
         Task<Result> CheckBookAvailability(Guid bookId, int quantity);
         Task<Result> CheckBasketCouponExpiryDate(string code);
+        Task<Result> CheckBookAvailabilityForUpdate(Guid basketItemId, int quantity);
     }
 }

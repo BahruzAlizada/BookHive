@@ -12,6 +12,7 @@ namespace BookHive.Domain.Entities
         public ICollection<BasketItem> BasketItems { get; set; }
         public bool IsCompleted { get; set; }
         public bool IsUsedCoupon {  get; set; }
+        public DateTime? CouponUsedDate {  get; set; }
         public double TotalPrice {  get; set; }
 
         public Guid? CouponId { get; set; } 

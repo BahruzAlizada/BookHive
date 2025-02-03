@@ -9,7 +9,6 @@ namespace BookHive.Application.Abstracts.Services.EntityFramework
     {
         Task AddItemToBasketAsync(BasketItemAddDto basketItemAddDto);
         Task ApplyCouponAsync(ApplyCouponToBasketDto applyCouponToBasketDto);
-        Task CalculateTotalPrice(Basket basket);
         Task ClearBasket();
     }
 }

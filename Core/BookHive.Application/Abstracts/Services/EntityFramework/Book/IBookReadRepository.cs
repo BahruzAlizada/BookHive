@@ -6,5 +6,6 @@ namespace BookHive.Application.Abstracts.Services.EntityFramework
 {
     public interface IBookReadRepository : IReadRepository<Book>
     {
+        Task<List<BookDto>> GetBookAllDtos();
     }
 }

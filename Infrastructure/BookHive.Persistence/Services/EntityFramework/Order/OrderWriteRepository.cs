@@ -1,4 +1,5 @@
 ﻿using BookHive.Application.Abstracts.Services.EntityFramework;
+using BookHive.Application.Abstracts.Services.ServiceContracts;
 using BookHive.Application.DTOs;
 using BookHive.Domain.Entities;
 using BookHive.Domain.Identity;
@@ -13,34 +14,20 @@ namespace BookHive.Persistence.Services.EntityFramework
     {
         private readonly Context context;
         private readonly UserManager<AppUser> userManager;
-        public OrderWriteRepository(Context context, UserManager<AppUser> userManager) : base(context)
+        private readonly IOrderService orderService;
+        public OrderWriteRepository(Context context, UserManager<AppUser> userManager, IOrderService orderService) : base(context)
         {
             this.context = context;
             this.userManager = userManager;
+            this.orderService = orderService;
         }
 
-        private async Task<Basket> GetUserActiveBasket()
-        {
-            //string username = httpContextAccessor.HttpContext.User.Identity.Name;
-            string username = "bahruzalizada";
-            if (string.IsNullOrEmpty(username))
-                throw new Exception("An error occured");
-
-            AppUser? user = await userManager.FindByNameAsync(username);
-            if (user == null)
-                throw new Exception("User is not authenticated.");
-
-            Basket? basket = await context.Baskets.FirstOrDefaultAsync(x => x.UserId == user.Id && !x.IsCompleted);
-            if (basket == null)
-                throw new Exception("An error occured");
-
-            return basket;
-        }
+       
 
 
         public async Task CreateOrder()
         {
-            Basket? basket = await GetUserActiveBasket();
+            Basket? basket = await orderService.GetUserActiveBasket();
             if (basket == null)
                 throw new Exception("Basket Not Found");
 

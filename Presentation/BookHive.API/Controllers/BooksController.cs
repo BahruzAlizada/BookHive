@@ -66,11 +66,3 @@ namespace BookHive.API.Controllers
         #endregion
     }
 }
-
-
-
-//Author - 7b0d6156-76d6-4360-b530-08dd2f698902
-//Publisher - 2a73a6bb-7a72-4cc6-aed7-08dd2f3fb736
-//Book Language - bf734254-87df-42bb-5035-08dd2b620e14
-//Book Status - dbeb1c7e-0a00-44f7-ec14-08dd2bf5c4fc
-//Genre - 7ecec695-31b3-4f7c-cc76-08dd2fdb1e9a

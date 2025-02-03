@@ -34,7 +34,6 @@
 
   <ItemGroup>
     <Folder Include="Services\Dapper\" />
-    <Folder Include="Services\ServiceContracts\" />
   </ItemGroup>
 
 </Project>

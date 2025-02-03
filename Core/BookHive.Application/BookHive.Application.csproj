@@ -39,7 +39,6 @@
 
   <ItemGroup>
     <Folder Include="Abstracts\Services\Dapper\" />
-    <Folder Include="Abstracts\Services\ServiceContracts\" />
   </ItemGroup>
 
 </Project>

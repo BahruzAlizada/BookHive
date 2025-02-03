@@ -22,7 +22,8 @@ namespace BookHive.Application.Features.Commands.Basket.UpdateQuantity
         public async Task<UpdateQuantityCommandResponse> Handle(UpdateQuantityCommandRequest request, CancellationToken cancellationToken)
         {
 
-            var result = BusinessRules.Run(basketRuleService.CheckBasketItemQuantity(request.BasketItemUpdateDto.Quantity));
+            var result = BusinessRules.Run(basketRuleService.CheckBasketItemQuantity(request.BasketItemUpdateDto.Quantity),
+                await basketRuleService.CheckBookAvailabilityForUpdate(request.BasketItemUpdateDto.BasketItemId, request.BasketItemUpdateDto.Quantity));
             if (result == null) return new() { Result = result };
 
             await basketItemWriteRepository.UpdateBasketItemQuantityAsync(request.BasketItemUpdateDto);

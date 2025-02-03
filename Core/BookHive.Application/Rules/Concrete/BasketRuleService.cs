@@ -59,5 +59,19 @@ namespace BookHive.Application.Rules.Concrete
 
             return new Result { Success = true };
         }
+
+        public async Task<Result> CheckBookAvailabilityForUpdate(Guid basketItemId, int quantity)
+        {
+            BasketItem basketItem = await basketItemReadRepository.GetFindAsync(basketItemId);
+
+            var availabilityResult = await CheckBookAvailability(basketItem.BookId, quantity);
+
+            if (!availabilityResult.Success)
+            {
+                return availabilityResult; 
+            }
+            return new Result { Success = true};
+
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BookHive.Application.Abstracts.Services.EntityFramework;
+using BookHive.Application.Abstracts.Services.ServiceContracts;
 using BookHive.Application.DTOs;
 using BookHive.Domain.Entities;
 using BookHive.Persistence.Concrete;
@@ -10,11 +11,11 @@ namespace BookHive.Persistence.Services.EntityFramework
     public class BasketItemWriteRepository : WriteRepository<BasketItem>, IBasketItemWriteRepository
     {
         private readonly Context context;
-        private readonly IBasketWriteRepository basketWriteRepository;
-        public BasketItemWriteRepository(Context context, IBasketWriteRepository basketWriteRepository) : base(context)
+        private readonly IBasketService basketService;
+        public BasketItemWriteRepository(Context context, IBasketService basketService) : base(context)
         {
             this.context = context;
-            this.basketWriteRepository = basketWriteRepository;
+            this.basketService = basketService;
         }
 
         public async Task DeleteBasketItem(BasketItem item)
@@ -28,7 +29,7 @@ namespace BookHive.Persistence.Services.EntityFramework
             await context.SaveChangesAsync();
 
 
-            await basketWriteRepository.CalculateTotalPrice(basket);
+            await basketService.CalculateTotalPrice(basket);
         }
 
         public async Task UpdateBasketItemQuantityAsync(BasketItemUpdateDto basketItemUpdateDto)
@@ -45,7 +46,7 @@ namespace BookHive.Persistence.Services.EntityFramework
             context.BasketItems.Update(basketItem);
             await context.SaveChangesAsync();
 
-            await basketWriteRepository.CalculateTotalPrice(basket);
+            await basketService.CalculateTotalPrice(basket);
         }
     }
 }

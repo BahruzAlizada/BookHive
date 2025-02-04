@@ -7,5 +7,6 @@ namespace BookHive.Application.Abstracts.Services.EntityFramework
     public interface IOrderWriteRepository : IWriteRepository<Order>
     {
         Task CreateOrder();
+        
     }
 }

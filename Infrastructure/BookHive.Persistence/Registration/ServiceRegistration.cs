@@ -1,8 +1,12 @@
-﻿using BookHive.Application.Abstracts.Services.EntityFramework;
-using BookHive.Application.Abstracts.Services.ServiceContracts;
+﻿using System.Data.Common;
+using BookHive.Application.Abstracts.ServiceContracts;
+using BookHive.Application.Abstracts.Services.Dapper;
+using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Persistence.Concrete;
+using BookHive.Persistence.ServiceContracts;
+using BookHive.Persistence.Services.Dapper;
 using BookHive.Persistence.Services.EntityFramework;
-using BookHive.Persistence.Services.ServiceContracts;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BookHive.Persistence.Registration
@@ -12,18 +16,24 @@ namespace BookHive.Persistence.Registration
         public static void AddPersistenceServices(this IServiceCollection services)
         {
             services.AddDbContext<Context>();
+            services.AddScoped<DbConnection>(provider => new SqlConnection(Context.SqlConnection));
+
 
             services.AddScoped<IBasketService,BasketService>();
-
+            services.AddScoped<IOrderService, OrderService>();
 
             services.AddScoped<ICategoryReadRepository, CategoryReadRepository>();
             services.AddScoped<ICategoryWriteRepository, CategoryWriteRepository>();
+            services.AddScoped<ICategoryReadDapper,CategoryReadDapper>();
+            services.AddScoped<ICategoryWriteDapper,CategoryWriteDapper>();
 
             services.AddScoped<IPublisherReadRepository, PublisherReadRepository>();
             services.AddScoped<IPublisherWriteRepository, PublisherWriteRepository>();
 
             services.AddScoped<IGenreReadRepository, GenreReadRepository>();
             services.AddScoped<IGenreWriteRepository, GenreWriteRepository>();
+            services.AddScoped<IGenreReadDapper,GenreReadDapper>();
+            services.AddScoped<IGenreWriteDapper, GenreWriteDapper>();
 
             services.AddScoped<IAuthorReadRepository, AuthorReadRepository>();
             services.AddScoped<IAuthorWriteRepository, AuthorWriteRepository>();

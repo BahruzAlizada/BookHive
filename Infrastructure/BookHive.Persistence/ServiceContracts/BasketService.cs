@@ -1,4 +1,4 @@
-﻿using BookHive.Application.Abstracts.Services.ServiceContracts;
+﻿using BookHive.Application.Abstracts.ServiceContracts;
 using BookHive.Domain.Entities;
 using BookHive.Domain.Identity;
 using BookHive.Persistence.Concrete;
@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookHive.Persistence.Services.ServiceContracts
+namespace BookHive.Persistence.ServiceContracts
 {
     public class BasketService : IBasketService
     {
@@ -16,7 +16,7 @@ namespace BookHive.Persistence.Services.ServiceContracts
         public BasketService(Context context, UserManager<AppUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             this.context = context;
-            this.userManager = userManager; 
+            this.userManager = userManager;
             this.httpContextAccessor = httpContextAccessor;
         }
 
@@ -44,11 +44,11 @@ namespace BookHive.Persistence.Services.ServiceContracts
                 if (basket.IsUsedCoupon)
                 {
                     Coupon? coupon = await ValidateAndApplyCouponAsync(basket);
-                    if(coupon != null)
+                    if (coupon != null)
                     {
                         if (coupon.IsPercentage)
                         {
-                            totalPrice = totalPrice - (totalPrice * coupon.Discount / 100);
+                            totalPrice = totalPrice - totalPrice * coupon.Discount / 100;
                         }
                         else
                         {
@@ -115,7 +115,7 @@ namespace BookHive.Persistence.Services.ServiceContracts
             && basket.CouponUsedDate.Value.AddDays(3).Date < DateTime.Now.Date;
 
             Coupon? coupon = await context.Coupons.FirstOrDefaultAsync(x => x.Id == basket.CouponId);
-            if ((coupon == null || coupon.ExpiryDate.Date < DateTime.Now.Date) || isCouponExpiredByAppliedDate)
+            if (coupon == null || coupon.ExpiryDate.Date < DateTime.Now.Date || isCouponExpiredByAppliedDate)
             {
                 basket.IsUsedCoupon = false;
                 basket.CouponId = null;

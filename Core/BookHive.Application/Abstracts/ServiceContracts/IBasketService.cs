@@ -1,8 +1,6 @@
-﻿
+﻿using BookHive.Domain.Entities;
 
-using BookHive.Domain.Entities;
-
-namespace BookHive.Application.Abstracts.Services.ServiceContracts
+namespace BookHive.Application.Abstracts.ServiceContracts
 {
     public interface IBasketService
     {

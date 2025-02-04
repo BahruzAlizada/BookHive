@@ -8,7 +8,5 @@ namespace BookHive.Application.DTOs
         public string Name { get; set; }
         public bool Status {  get; set; }
         public Guid CategoryId { get; set; }
-        public string CategoryName { get; set; }
-        public int BookCount { get; set; }
     }
 }

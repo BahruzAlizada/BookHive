@@ -1,11 +1,11 @@
-﻿using BookHive.Application.Abstracts.Services.ServiceContracts;
+﻿using BookHive.Application.Abstracts.ServiceContracts;
 using BookHive.Domain.Entities;
 using BookHive.Domain.Identity;
 using BookHive.Persistence.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookHive.Persistence.Services.ServiceContracts
+namespace BookHive.Persistence.ServiceContracts
 {
     public class OrderService : IOrderService
     {
@@ -16,6 +16,9 @@ namespace BookHive.Persistence.Services.ServiceContracts
             this.context = context;
             this.userManager = userManager;
         }
+
+
+
         public async Task<Basket> GetUserActiveBasket()
         {
             //string username = httpContextAccessor.HttpContext.User.Identity.Name;

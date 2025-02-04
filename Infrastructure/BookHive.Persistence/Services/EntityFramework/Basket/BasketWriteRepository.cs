@@ -1,5 +1,5 @@
-﻿using BookHive.Application.Abstracts.Services.EntityFramework;
-using BookHive.Application.Abstracts.Services.ServiceContracts;
+﻿using BookHive.Application.Abstracts.ServiceContracts;
+using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Application.DTO;
 using BookHive.Application.DTOs;
 using BookHive.Domain.Entities;

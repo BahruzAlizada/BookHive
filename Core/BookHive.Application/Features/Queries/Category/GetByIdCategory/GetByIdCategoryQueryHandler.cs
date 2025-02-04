@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using BookHive.Application.Abstracts.Services.Dapper;
 using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Application.Constants;
 using BookHive.Application.DTOs;
@@ -11,16 +11,16 @@ namespace BookHive.Application.Features.Queries.Category.GetByIdCategory
 {
     public class GetByIdCategoryQueryHandler : IRequestHandler<GetByIdCategoryQueryRequest, GetByIdCategoryQueryResponse>
     {
-        private readonly ICategoryReadRepository categoryReadRepository;
-        public GetByIdCategoryQueryHandler(ICategoryReadRepository categoryReadRepository, IMapper mapper)
+        private readonly ICategoryReadDapper categoryReadDapper;
+        public GetByIdCategoryQueryHandler(ICategoryReadDapper categoryReadDapper)
         {
-            this.categoryReadRepository = categoryReadRepository;
+            this.categoryReadDapper = categoryReadDapper;
         }
 
 
         public async Task<GetByIdCategoryQueryResponse> Handle(GetByIdCategoryQueryRequest request, CancellationToken cancellationToken)
         {
-            var category = await categoryReadRepository.GetFindAsync(request.Id);
+            var category = await categoryReadDapper.GetCategoryAsync(request.Id);
             if (category == null) return new() { Result = new ErrorResult(Messages.IdNull) };
                 
 

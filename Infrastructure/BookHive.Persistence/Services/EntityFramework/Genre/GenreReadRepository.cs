@@ -27,8 +27,6 @@ namespace BookHive.Persistence.Services.EntityFramework
                 Name = genre.Name,
                 Status = genre.Status,
                 CategoryId = genre.CategoryId,
-                CategoryName = genre.Category.Name,
-                BookCount = await context.Books.Where(x => x.GenreId == genre.Id).CountAsync()
             };
 
             return genreDto;
@@ -51,8 +49,6 @@ namespace BookHive.Persistence.Services.EntityFramework
                     Name = genre.Name,
                     Status = genre.Status,
                     CategoryId = genre.CategoryId,
-                    CategoryName = genre.Category.Name,
-                    BookCount = await context.Books.Where(x => x.GenreId == genre.Id).CountAsync()
                 };
                 genreDtos.Add(dto);
             }

@@ -37,8 +37,4 @@
     <ProjectReference Include="..\BookHive.Domain\BookHive.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Abstracts\Services\Dapper\" />
-  </ItemGroup>
-
 </Project>

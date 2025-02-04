@@ -1,44 +1,30 @@
-﻿using BookHive.Application.Abstracts.Services.EntityFramework;
+﻿using BookHive.Application.Abstracts.Services.Dapper;
+using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Application.Constants;
 using BookHive.Application.DTOs;
+using BookHive.Application.Parametres.ResponseParametres;
+using Mapster;
 using MediatR;
 
 namespace BookHive.Application.Features.Queries.Genre.GetByIdGenre
 {
     public class GetByIdGenreQueryHandler : IRequestHandler<GetByIdGenreQueryRequest, GetByIdGenreQueryResponse>
     {
-        private readonly IGenreReadRepository genreReadRepository;
-        public GetByIdGenreQueryHandler(IGenreReadRepository genreReadRepository)
+        private readonly IGenreReadDapper genreReadDapper;
+        public GetByIdGenreQueryHandler(IGenreReadDapper genreReadDapper)
         {
-            this.genreReadRepository = genreReadRepository;
+            this.genreReadDapper = genreReadDapper;
         }
 
 
         public async Task<GetByIdGenreQueryResponse> Handle(GetByIdGenreQueryRequest request, CancellationToken cancellationToken)
         {
-            GenreDto? genreDto = await genreReadRepository.GetGenreDtoAsync(request.Id);
-            if (genreDto==null)
-            {
-                return new GetByIdGenreQueryResponse
-                {
-                    Result = new Parametres.ResponseParametres.Result
-                    {
-                        Success = false,
-                        Message = Messages.IdNull
-                    }
-                };
-            }
+            var genre = await genreReadDapper.GetGenreAsync(request.Id);
+            if (genre == null) return new() { Result = new ErrorResult(Messages.IdNull) };
+           
 
-
-            return new GetByIdGenreQueryResponse
-            {
-                GenreDto = genreDto,
-                Result = new Parametres.ResponseParametres.Result
-                {
-                    Success = true,
-                    Message = Messages.SuccessGetFiltered
-                }
-            };
+            GenreDto genreDto = genre.Adapt<GenreDto>();
+            return new GetByIdGenreQueryResponse { GenreDto = genreDto, Result = new SuccessResult(Messages.SuccessGetFiltered) };
         }
     }
 }

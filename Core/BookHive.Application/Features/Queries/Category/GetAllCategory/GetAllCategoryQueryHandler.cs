@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookHive.Application.Abstracts.Services.Dapper;
 using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Application.Constants;
 using BookHive.Application.DTOs.Category;
@@ -11,20 +12,19 @@ namespace BookHive.Application.Features.Queries.Category.GetAllCategory
 {
     public class GetAllCategoryQueryHandler : IRequestHandler<GetAllCategoryQueryRequest, GetAllCategoryQueryResponse>
     {
-        private readonly ICategoryReadRepository categoryReadRepository;
-        public GetAllCategoryQueryHandler(ICategoryReadRepository categoryReadRepository, IMapper mapper)
+        private readonly ICategoryReadDapper categoryReadDapper;
+        public GetAllCategoryQueryHandler(ICategoryReadDapper categoryReadDapper)
         {
-            this.categoryReadRepository = categoryReadRepository;
+            this.categoryReadDapper = categoryReadDapper;
         }
 
 
         public async Task<GetAllCategoryQueryResponse> Handle(GetAllCategoryQueryRequest request, CancellationToken cancellationToken)
         {
-            int totalCategoryCount = await categoryReadRepository.GetAll(false).CountAsync();
-            var categories = await categoryReadRepository.GetAll(false).ToListAsync();
+            var categories = await categoryReadDapper.GetCategoriesAsync();
 
             List<CategoryDto> categoriesDto = categories.Adapt<List<CategoryDto>>();
-            return new() { TotalCategoryCount = totalCategoryCount, Categories = categoriesDto, Result = new SuccessResult(Messages.SuccessListed) };
+            return new() { Categories = categoriesDto, Result = new SuccessResult(Messages.SuccessListed) };
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using BookHive.Application.Abstracts.Services.EntityFramework;
-using BookHive.Application.Abstracts.Services.ServiceContracts;
+﻿using BookHive.Application.Abstracts.ServiceContracts;
+using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Application.DTOs;
 using BookHive.Domain.Entities;
 using BookHive.Domain.Identity;
@@ -38,7 +38,7 @@ namespace BookHive.Persistence.Services.EntityFramework
             {
                 BasketId = basket.Id,
                 TotalPrice = basket.TotalPrice,
-                IsCompleted = false,
+                IsCompleted = true,
                 OrderCode = orderCode,
             };
 

@@ -1,4 +1,5 @@
-﻿using BookHive.Application.Abstracts.Services.EntityFramework;
+﻿using BookHive.Application.Abstracts.Services.Dapper;
+using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Application.Constants;
 using BookHive.Application.DTOs;
 using BookHive.Application.Parametres.ResponseParametres;
@@ -10,16 +11,16 @@ namespace BookHive.Application.Features.Queries.Author.GetAuthorById
 {
     public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQueryRequest, GetAuthorByIdQueryResponse>
     {
-        private readonly IAuthorReadRepository authorReadRepository;
-        public GetAuthorByIdQueryHandler(IAuthorReadRepository authorReadRepository)
+        private readonly IAuthorReadDapper authorReadDapper;
+        public GetAuthorByIdQueryHandler(IAuthorReadDapper authorReadDapper)
         {
-            this.authorReadRepository = authorReadRepository;
+            this.authorReadDapper = authorReadDapper;
         }
 
 
         public async Task<GetAuthorByIdQueryResponse> Handle(GetAuthorByIdQueryRequest request, CancellationToken cancellationToken)
         {
-            BookHive.Domain.Entities.Author? author = await authorReadRepository.GetFindAsync(request.Id);
+            BookHive.Domain.Entities.Author? author = await authorReadDapper.GetAuthorAsync(request.Id);
             if (author == null) return new() { Result = new ErrorResult(Messages.IdNull) };
            
 

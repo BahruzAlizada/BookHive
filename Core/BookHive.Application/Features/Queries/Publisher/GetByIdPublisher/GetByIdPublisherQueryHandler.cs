@@ -1,4 +1,5 @@
-﻿using BookHive.Application.Abstracts.Services.EntityFramework;
+﻿using BookHive.Application.Abstracts.Services.Dapper;
+using BookHive.Application.Abstracts.Services.EntityFramework;
 using BookHive.Application.Constants;
 using BookHive.Application.DTOs;
 using BookHive.Application.Parametres.ResponseParametres;
@@ -9,16 +10,16 @@ namespace BookHive.Application.Features.Queries.Publisher.GetByIdPublisher
 {
     public class GetByIdPublisherQueryHandler : IRequestHandler<GetByIdPublisheQueryRequest, GetByIdPublisherQueryResponse>
     {
-        private readonly IPublisherReadRepository publisherReadRepository;
-        public GetByIdPublisherQueryHandler(IPublisherReadRepository publisherReadRepository)
+        private readonly IPublisherReadDapper publisherReadDapper;
+        public GetByIdPublisherQueryHandler(IPublisherReadDapper publisherReadDapper)
         {
-            this.publisherReadRepository = publisherReadRepository;
+            this.publisherReadDapper = publisherReadDapper;
         }
 
 
         public async Task<GetByIdPublisherQueryResponse> Handle(GetByIdPublisheQueryRequest request, CancellationToken cancellationToken)
         {
-            BookHive.Domain.Entities.Publisher? publisher = await publisherReadRepository.GetFindAsync(request.Id);
+            BookHive.Domain.Entities.Publisher? publisher = await publisherReadDapper.GetPublisherAsync(request.Id);
             if (publisher == null) return new() { Result = new ErrorResult(Messages.IdNull) };
 
             PublisherDto publisherDto = publisher.Adapt<PublisherDto>();

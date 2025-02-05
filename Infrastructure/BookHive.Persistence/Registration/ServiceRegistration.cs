@@ -6,6 +6,7 @@ using BookHive.Persistence.Concrete;
 using BookHive.Persistence.ServiceContracts;
 using BookHive.Persistence.Services.Dapper;
 using BookHive.Persistence.Services.EntityFramework;
+using BookHive.Persistence.Services.EntityFramework.BookStatistic;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -29,6 +30,8 @@ namespace BookHive.Persistence.Registration
 
             services.AddScoped<IPublisherReadRepository, PublisherReadRepository>();
             services.AddScoped<IPublisherWriteRepository, PublisherWriteRepository>();
+            services.AddScoped<IPublisherReadDapper,PublisherReadDapper>();
+            services.AddScoped<IPublisherReadDapper, PublisherReadDapper>();
 
             services.AddScoped<IGenreReadRepository, GenreReadRepository>();
             services.AddScoped<IGenreWriteRepository, GenreWriteRepository>();
@@ -37,9 +40,14 @@ namespace BookHive.Persistence.Registration
 
             services.AddScoped<IAuthorReadRepository, AuthorReadRepository>();
             services.AddScoped<IAuthorWriteRepository, AuthorWriteRepository>();
+            services.AddScoped<IAuthorReadDapper, AuthorReadDapper>();
+            services.AddScoped<IAuthorWriteDapper,AuthorWriteDapper>();
 
             services.AddScoped<IBookReadRepository, BookReadRepository>();
             services.AddScoped<IBookWriteRepository, BookWriteRepository>();
+
+            services.AddScoped<IBookStatisticReadRepository, BookStatisticReadRepository>();
+            services.AddScoped<IBookStatisticWriteRepository, BookStatisticWriteRepository>();
 
             services.AddScoped<IReviewReadRepository, ReviewReadRepository>();
             services.AddScoped<IReviewWriteRepository, ReviewWriteRepository>();
@@ -64,6 +72,9 @@ namespace BookHive.Persistence.Registration
 
             services.AddScoped<IOrderReadRepository, OrderReadRepository>();
             services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
+
+            services.AddScoped<IFriendshipReadRepository, FriendshipReadRepository>();
+            services.AddScoped<IFriendshipWriteRepository, FriendshipWriteRepository>();
 
         }
     }

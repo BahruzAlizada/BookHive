@@ -12,5 +12,9 @@ namespace BookHive.Domain.Identity
         public ICollection<Review> Reviews { get; set; }
         public ICollection<Basket>? Baskets { get; set; }
         public ICollection<CouponUsage>? CouponUsages { get; set; }
+
+
+        public ICollection<Friendship>? SentFriendRequests { get; set; }
+        public ICollection<Friendship>? ReceivedFriendRequests { get; set; }
     }
 }

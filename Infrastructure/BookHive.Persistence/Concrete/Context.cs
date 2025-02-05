@@ -1,4 +1,5 @@
-﻿using BookHive.Domain.Entities;
+﻿using System.Reflection.Emit;
+using BookHive.Domain.Entities;
 using BookHive.Domain.Enums;
 using BookHive.Domain.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -12,6 +13,23 @@ namespace BookHive.Persistence.Concrete
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(SqlConnection);
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Friendship>()
+                .HasOne(f => f.Requester)
+                .WithMany(u => u.SentFriendRequests)
+                .HasForeignKey(f => f.RequesterId)
+                .OnDelete(DeleteBehavior.Restrict);  // Dostluq silinərkən istifadəçi silinməsin
+
+            builder.Entity<Friendship>()
+                .HasOne(f => f.Addressee)
+                .WithMany(u => u.ReceivedFriendRequests)
+                .HasForeignKey(f => f.AddresseeId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -28,6 +46,7 @@ namespace BookHive.Persistence.Concrete
         public DbSet<CouponUsage> CouponUsages { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
+        public DbSet<Friendship> Friendships { get; set; }
 
 
         public DbSet<Menu> Menus { get; set; }

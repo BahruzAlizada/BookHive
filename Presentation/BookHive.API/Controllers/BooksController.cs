@@ -3,6 +3,7 @@ using BookHive.Application.Features.Commands.Book.CreateBook;
 using BookHive.Application.Features.Commands.Book.DeleteBook;
 using BookHive.Application.Features.Commands.Book.UpdateBook;
 using BookHive.Application.Features.Queries.Book.GetAllBook;
+using BookHive.Application.Features.Queries.Book.GetBookStatistic;
 using BookHive.Application.Features.Queries.Book.GetByIdBook;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -35,6 +36,15 @@ namespace BookHive.API.Controllers
         {
             GetByIdBookQueryResponse getByIdBookQueryResponse = await mediator.Send(getByIdBookQueryRequest);
             return Ok(getByIdBookQueryResponse);
+        }
+        #endregion
+
+        #region GetBookStatistic
+        [HttpGet("GetBookStatistic")]
+        public async Task<IActionResult> GetBookStatistic([FromQuery] GetBookStatisticQueryRequest getBookStatisticQueryRequest)
+        {
+            GetBookStatisticQueryResponse getBookStatisticQueryResponse = await mediator.Send(getBookStatisticQueryRequest);
+            return Ok(getBookStatisticQueryResponse);
         }
         #endregion
 
